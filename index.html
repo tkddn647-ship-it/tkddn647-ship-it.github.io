@@ -311,6 +311,7 @@ footer{margin-top:80px;padding-top:24px;border-top:1px solid var(--rule);color:v
     <div class="p-body">
       <div class="media">
         <img src="assets/rocket.jpg" alt="OpenRocket 설계 화면과 고도 시뮬레이션, Genesis AI 가상 비행 결과" loading="lazy">
+        <img src="assets/rocket_wind_sweep.png" alt="풍속 0에서 6 m/s까지 최고고도와 연소 종료 시 기울기를 계산한 6자유도 시뮬레이션 결과" loading="lazy">
       </div>
       <div class="p-text">
         <p>무게중심과 압력중심의 관계로 핀과 노즈콘을 설계하고, 실제 추력을 측정해 시뮬레이션을 보정했습니다. 목표 고도에 근접한 안정적 발사에 성공했습니다.</p>
@@ -318,11 +319,11 @@ footer{margin-top:80px;padding-top:24px;border-top:1px solid var(--rule);color:v
           <li>OpenRocket으로 핀·노즈콘 형상을 비교하고, 핀은 SolidWorks로 설계해 3D 프린팅했습니다.</li>
           <li>대회용 연료와 노즐을 로드셀에 연결해 추력을 직접 측정하고, 실측 추력곡선을 시뮬레이션에 넣었습니다.</li>
           <li>풍동 시험 대신 Genesis AI로 가상 비행을 돌려 실측 Roll·Pitch·Yaw와 비교했습니다.</li>
-          <li>OpenRocket 결과를 운동방정식 직접 적분으로 다시 계산해 최고고도 차이 4~5% 안에서 확인했습니다.</li>
+          <li>실측 추력·바람을 넣은 6자유도 시뮬레이터를 직접 만들어, 손으로 계산한 압력중심이 OpenRocket과 1 cm 안에서 맞는 것과 풍속에 따른 기울어짐을 확인했습니다.</li>
         </ul>
         <div class="verify">
-          <b>가상 비행과 실측 자세각 비교</b>
-          Pitch 경향은 재현했고, Roll·Yaw 편차는 원인을 분석해 보고서로 남겼습니다.
+          <b>실측 추력이 바꾼 예측</b>
+          같은 질량·항력에서 비교용 곡선은 최고고도 402 m, 로드셀 실측 곡선은 342 m. 실측 없이 설계했다면 성능을 18% 과대평가했을 것입니다.
         </div>
         <ul class="tags"><li>OpenRocket</li><li>SolidWorks</li><li>3D 프린팅</li><li>Genesis AI</li><li>로드셀</li></ul>
         <div class="p-links"><a href="https://github.com/tkddn647-ship-it/AJR-2_rocket">설계 파일·검증 코드</a></div>
