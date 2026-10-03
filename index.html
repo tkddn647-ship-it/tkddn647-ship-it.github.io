@@ -43,9 +43,6 @@ h2{font:700 28px/1.3 var(--serif);color:var(--ink);margin:0 0 22px}
 .intro{max-width:720px;margin-bottom:72px}
 .intro .lead{font:700 31px/1.45 var(--serif);color:var(--ink);margin:0 0 22px;letter-spacing:-.01em}
 .intro p{margin:0 0 14px;max-width:62ch}
-.proof{margin-top:34px;background:var(--sheet);border:1px solid var(--rule);border-radius:10px;padding:22px 24px}
-.proof h3{margin:0 0 4px;font:600 15px/1.4 var(--sans);color:var(--ink)}
-.proof .note{margin:0 0 16px;font-size:14px;color:var(--slate)}
 
 /* the verification gauge: predicted vs measured */
 .gauge{display:grid;grid-template-columns:118px 1fr 70px;align-items:center;gap:6px 12px;font-size:14px}
@@ -142,15 +139,6 @@ footer{margin-top:80px;padding-top:24px;border-top:1px solid var(--rule);color:v
   <p>기계공학을 전공하며 로켓, 경주용 차량, 자율주행 레이싱카, 수중 로봇을 직접 만들었습니다. 기구 설계와 해석에서 시작해, 전공만으로 채워지지 않는 펌웨어·ROS2·강화학습까지 프로젝트로 넓혀 왔습니다.</p>
   <p>현장의 데이터를 수집해 다른 사람이 바로 쓸 수 있게 만드는 일에 가장 몰입합니다. 지금은 무브와이즈랩에서 카메라 기반 Costmap을 설계하고 있습니다.</p>
 
-  <div class="proof">
-    <h3>예측과 실측을 나란히 둡니다</h3>
-    <p class="note">Formula Student 계측 시스템의 최고속도를 섀시 다이나모와 비교한 결과</p>
-    <div class="gauge" data-max="100">
-      <span class="lab">계측 시스템</span><span class="track"><span class="bar sim" data-v="90"></span></span><span class="val">90 km/h</span>
-      <span class="lab">다이나모</span><span class="track"><span class="bar real" data-v="87"></span></span><span class="val">87 km/h</span>
-      <span></span><span class="delta">오차 약 3.4%</span>
-    </div>
-  </div>
 </section>
 
 <section id="projects">
