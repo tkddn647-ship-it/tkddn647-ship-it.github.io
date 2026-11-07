@@ -175,6 +175,32 @@ footer{margin-top:80px;padding-top:24px;border-top:1px solid var(--rule);color:v
     </div>
   </article>
 
+  <!-- AI Office -->
+  <article class="project" data-cat="ai">
+    <div class="p-head"><h3>AI Office: AI 에이전트 개발 자동화</h3><span class="p-when">2026.10 – 운영 중</span></div>
+    <p class="p-ctx">개인 프로젝트, 기획·운영 (코드는 Claude Code·Cursor로 작성)</p>
+    <div class="p-body">
+      <div class="media">
+        <img src="assets/ai_office.svg" alt="AI Office 흐름: 이슈에 라벨을 달면 계획, 구현, 검토를 거쳐 PR이 만들어지고 사람이 병합" loading="lazy">
+      </div>
+      <div class="p-text">
+        <p>이슈에 라벨 하나만 달면 AI가 역할을 나눠 계획, 구현, 검토를 거쳐 PR까지 만드는 GitHub Actions 자동화입니다. 사람이 매번 AI에게 나눠 시키던 반복 작업을 없앴습니다.</p>
+        <ul>
+          <li>계획 AI가 이슈를 최대 3개 작업으로 나누고, 구현 AI가 작업마다 코드를 고치고, 검토 AI가 변경 내용을 리뷰합니다.</li>
+          <li>계획·검토 AI는 읽기 전용이고, 자동 병합은 없습니다. 사람이 PR을 보고 병합합니다.</li>
+          <li>테스트를 직접 실행해 결과를 PR에 붙이고, 리뷰에서 문제가 나오면 자동 수정 라운드를 돕니다.</li>
+          <li>시험공부 레포에는 출처 검사 규칙을 걸었습니다. 없는 파일·쪽을 출처로 쓰면 CI가 실패하고, 이 규칙으로 AI가 원자료 밖 내용으로 만든 결과 1건을 걸러 냈습니다.</li>
+        </ul>
+        <div class="verify">
+          <b>실제 레포 2곳에서 운영한 결과 (2026.10.27 기준)</b>
+          PR 24개 생성, 24개 모두 병합. 시험공부 레포 15개, 레이싱카 강화학습 레포 9개.
+        </div>
+        <ul class="tags"><li>Python</li><li>GitHub Actions</li><li>Claude Code</li><li>Cursor</li><li>YAML</li></ul>
+        <div class="p-links"><a href="https://github.com/tkddn647-ship-it/ai-office">코드 보기</a></div>
+      </div>
+    </div>
+  </article>
+
   <!-- 2 -->
   <article class="project" data-cat="robot">
     <div class="p-head"><h3>Jetson 기반 자율주행 SLAM과 실차 주행 스택<span class="award">학교 최초 출전 본선 진출</span></h3><span class="p-when">2026</span></div>
@@ -342,6 +368,7 @@ footer{margin-top:80px;padding-top:24px;border-top:1px solid var(--rule);color:v
     <div class="skill"><h3>로보틱스·자율주행</h3><p>ROS2 Humble, Cartographer SLAM, TF Tree 설계, Stanley·Pure Pursuit, Follow-the-Gap, NVIDIA Jetson, Linux</p></div>
     <div class="skill"><h3>임베디드·계측</h3><p>STM32 HAL·CubeMX·DMA, C/C++, CAN, UART·SPI·I2C·ADC, Raspberry Pi, ESP32, VESC, KiCad</p></div>
     <div class="skill"><h3>AI·데이터·서버</h3><p>Python, PyTorch, Stable-Baselines3(SAC·PPO), NetworkX, Flask, FastAPI, UDP/TCP, AWS</p></div>
+    <div class="skill"><h3>LLM 업무 자동화</h3><p>Claude Code, Cursor CLI, GitHub Actions, Gemini API, 출처 검사·테스트 자동 실행</p></div>
     <div class="skill"><h3>기계 설계·해석</h3><p>SolidWorks, 3D 프린팅, Ansys CFX·Mechanical·System Coupling, OpenRocket, Genesis AI, MATLAB</p></div>
   </div>
 </section>
