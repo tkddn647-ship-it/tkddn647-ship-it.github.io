@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>권상우 포트폴리오</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 rx=%226%22 fill=%22%23161B33%22/%3E%3Crect x=%227%22 y=%2219%22 width=%2218%22 height=%224%22 rx=%222%22 fill=%22%239A6F33%22/%3E%3Crect x=%227%22 y=%2211%22 width=%2213%22 height=%224%22 rx=%222%22 fill=%22%23fff%22/%3E%3C/svg%3E">
-<meta name="description" content="기계공학 기반으로 로봇·차량·로켓을 만들고 실측으로 검증해 온 권상우의 프로젝트 포트폴리오">
+<meta name="description" content="기계공학 기반으로 로봇·차량을 만들고, 센서 데이터를 모아 SQL로 후처리·검증해 온 권상우의 프로젝트 포트폴리오">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600&family=Noto+Serif+KR:wght@600;700;900&display=swap" rel="stylesheet">
@@ -112,7 +112,7 @@ footer{margin-top:80px;padding-top:24px;border-top:1px solid var(--rule);color:v
 <aside class="rail">
   <h1>권상우</h1>
   <p class="en">Sangwoo Kwon</p>
-  <p class="role">아주대학교 기계공학과<br>로봇·차량·로켓을 만들고<br>실측으로 검증합니다.</p>
+  <p class="role">아주대학교 기계공학과<br>센서 데이터를 모으고<br>믿을 수 있게 만듭니다.</p>
   <nav aria-label="페이지 목차">
     <a href="#about">소개</a>
     <a href="#projects">프로젝트</a>
@@ -127,9 +127,9 @@ footer{margin-top:80px;padding-top:24px;border-top:1px solid var(--rule);color:v
 <main>
 
 <section id="about" class="intro">
-  <p class="lead">시뮬레이션 결과를 그대로 믿지 않고, 실제로 재서 확인하는 엔지니어입니다.</p>
+  <p class="lead">데이터를 그대로 믿지 않고, 다시 재고 검증해서 쓸 수 있게 만드는 엔지니어입니다.</p>
   <p>기계공학을 전공하며 로켓, 경주용 차량, 자율주행 레이싱카, 수중 로봇을 직접 만들었습니다. 기구 설계와 해석에서 시작해, 전공만으로 채워지지 않는 펌웨어·ROS2·강화학습까지 프로젝트로 넓혀 왔습니다.</p>
-  <p>현장의 데이터를 수집해 다른 사람이 바로 쓸 수 있게 만드는 일에 가장 몰입합니다. 지금은 무브와이즈랩에서 카메라 기반 Costmap을 설계하고 있습니다.</p>
+  <p>현장의 데이터를 수집해 다른 사람이 바로 쓸 수 있게 만드는 일에 가장 몰입합니다. 경주차 계측 시스템(DAQ)으로 데이터를 모으는 데서 시작해, 지금은 그 주행 로그를 SQL로 후처리하고 품질을 검증하는 파이프라인까지 다루고 있습니다. 무브와이즈랩에서는 카메라 기반 Costmap을 설계하고 있습니다.</p>
 
 </section>
 
@@ -137,11 +137,71 @@ footer{margin-top:80px;padding-top:24px;border-top:1px solid var(--rule);color:v
   <h2>프로젝트</h2>
   <div class="filters" role="group" aria-label="분야별 보기">
     <button type="button" data-f="all" aria-pressed="true">전체</button>
+    <button type="button" data-f="data" aria-pressed="false">데이터 엔지니어링</button>
     <button type="button" data-f="robot" aria-pressed="false">로보틱스·자율주행</button>
     <button type="button" data-f="embedded" aria-pressed="false">임베디드·계측</button>
     <button type="button" data-f="ai" aria-pressed="false">AI·데이터</button>
     <button type="button" data-f="mech" aria-pressed="false">기계 설계·해석</button>
   </div>
+
+  <!-- afa-telemetry-sql -->
+  <article class="project" data-cat="data ai">
+    <div class="p-head"><h3>주행 로그 SQL 후처리와 데이터 품질 검증</h3><span class="p-when">2026.11</span></div>
+    <p class="p-ctx">개인 프로젝트 (코드는 Claude Code로 작성, 검증 과정은 AI_LOG에 기록)</p>
+    <div class="p-body">
+      <div class="media">
+        <img src="assets/telemetry.svg" alt="흐름도: 주행 로그를 형식 판별해 SQLite에 넣고, 품질 검사를 SQL·pandas·실시간 세 구현으로 대조한 뒤 보고서와 변화 판정을 만든다. AI 분석은 SQL을 다시 실행해 검증한다" loading="lazy">
+        <img src="assets/telemetry_scatter.png" alt="부하 구간 산점도: 팩 전류가 인버터 전류의 약 0.8배로 기준선 아래에 몰려 있다" loading="lazy">
+      </div>
+      <div class="p-text">
+        <p>경주차 DAQ로 모은 실주행 로그 10세션(198,027행)을 SQLite로 옮겨, 품질 검사 → 원인 추적 → 자동 보고서까지 이어지는 파이프라인을 만들었습니다. AI가 짠 SQL과 분석이 맞는지 채점하고 다시 계산하는 장치도 함께 두었습니다.</p>
+        <ul>
+          <li>결함을 정답과 함께 심어 품질 규칙을 시험하다, 두 행 연달아 튄 값을 하나도 못 잡는 빈틈을 찾아 5행 중앙값 규칙으로 고쳤습니다. 실제 로그에서 찾은 깨진 행이 88 → 610행이 됐습니다.</li>
+          <li>같은 규칙을 SQL·pandas·실시간 세 가지로 구현해 1,319칸이 모두 일치하는지 대조합니다. 처음 보는 로그 형식도 열 대응 표 한 장으로 받습니다.</li>
+          <li>깨진 행이 빠진 샘플과 0.106 비율로 함께 움직이는 것(10세션 상관 0.999)을 찾아, 펌웨어 수정 효과를 주행 세션 하나로 판정하게 했습니다.</li>
+          <li>AI가 짠 SQL은 정답을 아는 질문 25개로 채점해 정답률을 8~10/17 → 16/17로 올렸고, 분석 에이전트의 주장은 SQL을 다시 실행해 확인합니다.</li>
+        </ul>
+        <div class="verify">
+          <b>두 행 연달아 튄 값 탐지율 (결함 주입 시험)</b>
+          <div class="gauge" data-max="100">
+            <span class="lab">기존 규칙</span><span class="track"><span class="bar sim" data-v="0"></span></span><span class="val">0%</span>
+            <span class="lab">5행 중앙값</span><span class="track"><span class="bar real" data-v="99.5"></span></span><span class="val">99.5%</span>
+          </div>
+          <p style="margin:10px 0 0;font-size:14px">규정 점검 SQL로 찾은 '프리차지 미달 6/6'은, 펌웨어와 대조해 보니 위반이 아니라 신호 정의 결함이었습니다.</p>
+        </div>
+        <ul class="tags"><li>SQL (SQLite)</li><li>Python</li><li>pandas</li><li>GitHub Actions</li><li>MCP</li><li>Claude Code</li></ul>
+        <div class="p-links"><a href="https://github.com/tkddn647-ship-it/afa-telemetry-sql">코드 보기</a><a href="https://github.com/tkddn647-ship-it/afa-telemetry-sql/blob/main/docs/explain.md">설명 노트</a></div>
+      </div>
+    </div>
+  </article>
+
+  <!-- 3 -->
+  <article class="project" data-cat="embedded data">
+    <div class="p-head"><h3>차량 실시간 센서 데이터 수집 시스템 (DAQ)</h3><span class="p-when">Formula Student</span></div>
+    <p class="p-ctx">계측 파트장, 2인 팀</p>
+    <div class="p-body">
+      <div class="media">
+        <img src="assets/daq_board.jpg" alt="차량에 장착한 STM32와 라즈베리파이 계측 보드 배선" loading="lazy">
+        <img src="assets/daq_dashboard.jpg" alt="주행 영상과 센서 그래프를 시간 동기화해 보여 주는 분석 화면" loading="lazy">
+        <img src="assets/afa_layout.jpg" alt="계측 시스템 구조도: 센서와 CAN이 STM32로 모이고 라즈베리파이를 거쳐 서버로" loading="lazy">
+      </div>
+      <div class="p-text">
+        <p>전기 경주차의 서스펜션 변위, 가속도, 인버터·BMS, 조향 데이터를 STM32에서 한 타임라인으로 모으고, 라즈베리파이를 거쳐 서버의 실시간 대시보드·로깅·카메라 녹화까지 연결했습니다.</p>
+        <ul>
+          <li>STM32F407 펌웨어: 전압·전류·휠속도·냉각수 유량, CAN 2버스(인버터+BMS 250 kbps, 조향 500 kbps).</li>
+          <li>I2C에서 UART·DMA로 전환하고 STM32(Slave)–라즈베리파이(Master) 구조로 다시 설계해 수집 주기를 10 Hz → 100 Hz로 올렸습니다.</li>
+          <li>주행 영상과 로깅 데이터를 시간 동기화한 분석 화면을 만들어 섀시·파워트레인 파트가 바로 쓰게 했습니다.</li>
+          <li>센서 단 전압 강하 같은 배선 문제를 실측으로 추적해 문서로 남겼습니다.</li>
+        </ul>
+        <div class="verify">
+          <b>섀시 다이나모로 계측값 검증</b>
+          최고속도 계측 90 km/h, 다이나모 87 km/h, 오차 약 3.4%.
+        </div>
+        <ul class="tags"><li>STM32 HAL</li><li>DMA</li><li>CAN</li><li>C</li><li>Raspberry Pi 5</li><li>UDP/TCP</li><li>FastAPI</li></ul>
+        <div class="p-links"><a href="https://github.com/tkddn647-ship-it/afa2026">코드 보기</a><a href="https://github.com/tkddn647-ship-it/afa-telemetry-sql">이 데이터의 SQL 분석</a></div>
+      </div>
+    </div>
+  </article>
 
   <!-- 1 -->
   <article class="project" data-cat="robot ai">
@@ -227,36 +287,8 @@ footer{margin-top:80px;padding-top:24px;border-top:1px solid var(--rule);color:v
     </div>
   </article>
 
-  <!-- 3 -->
-  <article class="project" data-cat="embedded">
-    <div class="p-head"><h3>차량 실시간 센서 데이터 수집 시스템 (DAQ)</h3><span class="p-when">Formula Student</span></div>
-    <p class="p-ctx">계측 파트장, 2인 팀</p>
-    <div class="p-body">
-      <div class="media">
-        <img src="assets/daq_board.jpg" alt="차량에 장착한 STM32와 라즈베리파이 계측 보드 배선" loading="lazy">
-        <img src="assets/daq_dashboard.jpg" alt="주행 영상과 센서 그래프를 시간 동기화해 보여 주는 분석 화면" loading="lazy">
-        <img src="assets/afa_layout.jpg" alt="계측 시스템 구조도: 센서와 CAN이 STM32로 모이고 라즈베리파이를 거쳐 서버로" loading="lazy">
-      </div>
-      <div class="p-text">
-        <p>전기 경주차의 서스펜션 변위, 가속도, 인버터·BMS, 조향 데이터를 STM32에서 한 타임라인으로 모으고, 라즈베리파이를 거쳐 서버의 실시간 대시보드·로깅·카메라 녹화까지 연결했습니다.</p>
-        <ul>
-          <li>STM32F407 펌웨어: 전압·전류·휠속도·냉각수 유량, CAN 2버스(인버터+BMS 250 kbps, 조향 500 kbps).</li>
-          <li>I2C에서 UART·DMA로 전환하고 STM32(Slave)–라즈베리파이(Master) 구조로 다시 설계해 수집 주기를 10 Hz → 100 Hz로 올렸습니다.</li>
-          <li>주행 영상과 로깅 데이터를 시간 동기화한 분석 화면을 만들어 섀시·파워트레인 파트가 바로 쓰게 했습니다.</li>
-          <li>센서 단 전압 강하 같은 배선 문제를 실측으로 추적해 문서로 남겼습니다.</li>
-        </ul>
-        <div class="verify">
-          <b>섀시 다이나모로 계측값 검증</b>
-          최고속도 계측 90 km/h, 다이나모 87 km/h, 오차 약 3.4%.
-        </div>
-        <ul class="tags"><li>STM32 HAL</li><li>DMA</li><li>CAN</li><li>C</li><li>Raspberry Pi 5</li><li>UDP/TCP</li><li>FastAPI</li></ul>
-        <div class="p-links"><a href="https://github.com/tkddn647-ship-it/afa2026">코드 보기</a></div>
-      </div>
-    </div>
-  </article>
-
   <!-- 4 -->
-  <article class="project" data-cat="ai">
+  <article class="project" data-cat="ai data">
     <div class="p-head"><h3>대구시 응급 출동 골든타임 최적화</h3><span class="p-when">2026.09</span></div>
     <p class="p-ctx">2026 데이터+AI 혁신챌린지 (데이터안심구역 경진대회)</p>
     <div class="p-body">
@@ -365,9 +397,10 @@ footer{margin-top:80px;padding-top:24px;border-top:1px solid var(--rule);color:v
 <section id="skills" class="block">
   <h2>기술</h2>
   <div class="skills">
+    <div class="skill"><h3>데이터 엔지니어링</h3><p>SQL(SQLite: 창 함수·CTE·gaps-and-islands), 데이터 품질 검사·결함 주입 시험, 증분 적재·로그 형식 대응, pandas, GitHub Actions CI, MCP 서버</p></div>
     <div class="skill"><h3>로보틱스·자율주행</h3><p>ROS2 Humble, Cartographer SLAM, TF Tree 설계, Stanley·Pure Pursuit, Follow-the-Gap, NVIDIA Jetson, Linux</p></div>
     <div class="skill"><h3>임베디드·계측</h3><p>STM32 HAL·CubeMX·DMA, C/C++, CAN, UART·SPI·I2C·ADC, Raspberry Pi, ESP32, VESC, KiCad</p></div>
-    <div class="skill"><h3>AI·데이터·서버</h3><p>Python, PyTorch, Stable-Baselines3(SAC·PPO), NetworkX, Flask, FastAPI, UDP/TCP, AWS</p></div>
+    <div class="skill"><h3>AI·서버</h3><p>Python, PyTorch, Stable-Baselines3(SAC·PPO), NetworkX, Flask, FastAPI, UDP/TCP, AWS</p></div>
     <div class="skill"><h3>LLM 업무 자동화</h3><p>Claude Code, Cursor CLI, GitHub Actions, Gemini API, 출처 검사·테스트 자동 실행</p></div>
     <div class="skill"><h3>기계 설계·해석</h3><p>SolidWorks, 3D 프린팅, Ansys CFX·Mechanical·System Coupling, OpenRocket, Genesis AI, MATLAB</p></div>
   </div>
