@@ -203,6 +203,37 @@ footer{margin-top:80px;padding-top:24px;border-top:1px solid var(--rule);color:v
     </div>
   </article>
 
+  <!-- W03 AX -->
+  <article class="project" data-cat="ai data">
+    <div class="p-head"><h3>품질 이슈·회수·재공급 운영 시스템</h3><span class="p-when">2026.11</span></div>
+    <p class="p-ctx">AX인재전쟁 온라인 삼일PwC 출제 회차, 개인 참가 (업무 규칙·판단 기준 설계와 검증, 코드는 Claude Code로 작성)</p>
+    <div class="p-body">
+      <div class="media">
+        <img src="assets/w03.svg" alt="흐름도: 클레임 접수, 회수대상 판정, 상신, 품질위원회 의결, 실행과 재공급. 계산과 판정은 규칙 엔진, 문장은 AI, 의결은 사람이 맡는다" loading="lazy">
+      </div>
+      <div class="p-text">
+        <p>화장품 제품에 피부 트러블 클레임과 언론 보도가 겹친 상황에서, 클레임 접수 → 회수대상 판정 → 품질위원회 의결 → 재공급 계획까지를 하나로 잇는 웹 업무 시스템입니다.</p>
+        <ul>
+          <li>클레임이 들어오면 배치별 불량률을 생산량·출하량 두 분모로 다시 계산해, 하나라도 10% 이상이면 회수대상으로 판정합니다. 판단 규칙 10개와 직접 세운 가정 32개를 설계 문서에 적었습니다.</li>
+          <li>AI는 상신 요약과 부서별 조치 문장, 회신 정리만 맡고 입력은 규칙 엔진의 계산값뿐입니다. 문장 속 숫자가 계산값과 다르거나 의결 전에 결정된 것처럼 읽히면 다시 생성하고, 실패하면 사람이 쓰는 경로로 넘어갑니다.</li>
+          <li>회수 배치와 같은 원료 로트를 쓴 배치를 역추적해 출하 전 추가검사로 묶고, 재공급 계산에서 뺍니다. 의결 전에 예상 공급 영향을 먼저 보여 줍니다.</li>
+        </ul>
+        <div class="verify">
+          <b>회수 물량 비교 (대회 데이터, 규칙 판정 = 1배)</b>
+          <div class="gauge" data-max="10">
+            <span class="lab">규칙 판정</span><span class="track"><span class="bar real" data-v="1"></span></span><span class="val">1배</span>
+            <span class="lab">같은 로트 전부</span><span class="track"><span class="bar sim" data-v="2"></span></span><span class="val">약 2배</span>
+            <span class="lab">2026 생산분 전부</span><span class="track"><span class="bar sim" data-v="9.1"></span></span><span class="val">약 9.1배</span>
+            <span></span><span class="delta">비교 물량은 추정치</span>
+          </div>
+          <p style="margin:10px 0 0;font-size:14px">회수대상 2개 배치(불량률 11.59~12.27%)를 찾고, 재공급 필요량이 라인 여유의 5.12배라 '대안 필요'로 판정했습니다. 같은 로트 재고 13,696EA는 출하 전 추가검사로 묶었습니다. 자동 테스트 195개.</p>
+        </div>
+        <ul class="tags"><li>Python</li><li>FastAPI</li><li>SQLite</li><li>Pydantic</li><li>Gemini API</li><li>pytest</li></ul>
+        <div class="p-links"><a href="https://github.com/tkddn647-ship-it/w03-quality-recall">코드 보기</a><a href="https://github.com/tkddn647-ship-it/w03-quality-recall/blob/main/DESIGN.md">설계 문서</a></div>
+      </div>
+    </div>
+  </article>
+
   <!-- 1 -->
   <article class="project" data-cat="robot ai">
     <div class="p-head"><h3>지도 없이 라이다로 달리는 레이싱카 제어기</h3><span class="p-when">2026.09 – 2026.10</span></div>
