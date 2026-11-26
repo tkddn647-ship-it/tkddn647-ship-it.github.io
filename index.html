@@ -147,7 +147,7 @@ footer{margin-top:80px;padding-top:24px;border-top:1px solid var(--rule);color:v
   <div class="proofs">
     <a class="proof" href="#p-kspo"><span class="num">58종 점검</span><span class="what">한 공공기관의 개방 데이터를 같은 규칙으로 점검해, 기관이 공개한 목록 파일에 빠진 포털 데이터 17종을 찾았습니다.</span><span class="src">공공 스포츠강좌 찾기 · 공공데이터 활용 경진대회 출품</span></a>
     <a class="proof" href="#p-sql"><span class="num">0% → 99.5%</span><span class="what">일부러 심은 결함으로 품질 규칙을 시험해, 두 행 연달아 튄 값을 하나도 못 잡던 빈틈을 고쳤습니다.</span><span class="src">주행 로그 SQL 후처리와 데이터 품질 검증</span></a>
-    <a class="proof" href="#p-daq"><span class="num">누락 5% → 0</span><span class="what">주행 기록이 0.2초마다 빠지던 원인을 영상 대조로 좁혀, 재현 시험에서 0으로 만들었습니다. 실차 확인은 남은 과제입니다.</span><span class="src">전기 경주차 실시간 데이터 수집 시스템</span></a>
+    <a class="proof" href="#p-daq"><span class="num">손실 62% → 19%</span><span class="what">주행 중 튀는 값을 고전압·고전류 간섭으로 판단해 신호선을 차폐하고, 같은 전류 구간끼리 비교해 효과를 확인했습니다. 남은 손실은 비트 단위로 원인을 추적했습니다.</span><span class="src">전기 경주차 실시간 데이터 수집 시스템</span></a>
     <a class="proof" href="#p-paper"><span class="num">제1저자 2편</span><span class="what">자동차 정지거리 식이 사람의 반응시간을 전제로 한다는 점을 짚고, 로봇에 맞는 산정식을 제시했습니다.</span><span class="src">한국도로학회 학술대회 · 로봇 31종 제원 분석</span></a>
   </div>
   <ul class="honors">
@@ -247,15 +247,28 @@ footer{margin-top:80px;padding-top:24px;border-top:1px solid var(--rule);color:v
         </ul>
         <div class="verify">
           <b>섀시 다이나모로 계측값 검증</b>
-          최고속도 계측 90 km/h, 다이나모 87 km/h, 오차 약 3.4%.
+          최고속도 계측 90 km/h, 다이나모 87 km/h, 오차 약 3.4% (2026.08).
+        </div>
+        <div class="verify">
+          <b>고전압·고전류 간섭 판단과 차폐</b>
+          7월 주행에서 센서 값이 튀자 고전압·고전류 간섭으로 판단하고 신호선을 분리·차폐했습니다. 같은 인버터 전류 구간(40 A 초과)끼리 차폐 전(7/28~7/31)과 후(8/11~8/13)를 비교하면 기록 손실 62% → 19%, 손상된 줄 1000줄당 21.6 → 3.6(약 1/6)입니다. 같은 기간 다른 장착 변경도 있어 차폐만의 효과로 떼어 내지는 못했고, 19%는 남았습니다.
         </div>
         <div class="verify">
           <b>수집 기록이 주기적으로 약 5%씩 빠지던 문제</b>
-          2026년 7~8월 주행 기록 25세션, 약 178만 줄을 카메라 영상 15개와 대조했습니다. 정차 중에도 0.2초마다 같은 간격으로 빠지는 누락을 찾았고, 장치가 0.2초마다 온도를 읽느라 기록 하나가 늦게 찍히면 서버 저장 규칙이 다음 정상 기록을 버리는 것이 원인이었습니다. 저장 규칙에 허용 오차를 두어 재현 시험에서 주기적 누락 5.0% → 0, 2초 끊김 모의에서 잃는 기록 200 → 0이 됐습니다. 영상으로 검증하는 방향과 결과 확인은 직접, 분석 코드는 Claude Code와 함께 작성했고, 실차 재검증과 전류가 클 때 커지는 구간 누락은 남은 과제입니다.
+          2026년 7~8월 기록 40세션(주행 25세션), 약 178만 줄을 카메라 영상 15개와 대조했습니다. 정차 중에도 0.2초마다 같은 간격으로 빠지는 누락을 찾았고, 장치가 0.2초마다 온도를 읽느라 기록 하나가 늦게 찍히면 서버 저장 규칙이 다음 정상 기록을 버리는 것이 원인이었습니다. 저장 규칙에 허용 오차를 두어 재현 시험에서 주기적 누락 5.0% → 0, 2초 끊김 모의에서 잃는 기록 200 → 0이 됐습니다. 영상으로 검증하는 방향과 결과 확인은 직접, 분석 코드는 Claude Code와 함께 작성했습니다.
           <img src="assets/afa_loss.png" alt="세션별 누락 비율: 회색 주기적 누락은 약 5%로 일정하고 파란 구간 누락은 0~53%로 달라진다" loading="lazy" style="width:100%;margin-top:10px">
         </div>
+        <div class="verify">
+          <b>전류가 클 때 커지던 구간 손실: 통신 비트 오류</b>
+          항상 0이어야 하는 칸에 찍힌 숫자 1758건 중 98.4%가 1·2·4·8이었습니다. 문자 '0'의 비트 하나가 뒤집힌 값입니다. STM32→라즈베리파이 통신(UART)에 체크섬이 없어 손상된 줄이 그대로 기록되거나 버려졌고, 손실은 인버터 전류를 따라 커졌습니다. 줄 끝 CRC 검사와 줄 검사를 넣어 비트 오류 모의에서 틀린 값이 기록되는 경우를 50건 이상 → 0으로 막았습니다. 차와 장비를 더 다룰 수 없어 실차에는 적용하지 못했고, 손실 자체는 배선(차동 신호·차폐)으로 막았어야 했습니다.
+          <img src="assets/afa_uart.png" alt="인버터 상태별 손실(차폐 전 7%~62%, 차폐 후 11%~19%), '0'을 대신한 숫자 분포(1·2·4·8이 대부분), 구 파서와 새 파서의 비트 오류 모의" loading="lazy" style="width:100%;margin-top:10px">
+        </div>
+        <div class="verify">
+          <b>내 판단을 고친 것: 전류 25% 불일치</b>
+          시즌 중에는 인버터 전류가 BMS보다 약 25% 큰 것을 CAN 배율 누락으로 봤습니다. 시즌 후 인버터 CAN 매뉴얼과 대조하니 펌웨어 해석은 맞았고, 인버터의 전류·토크는 측정값이 아니라 인버터가 계산한 값이었습니다(토크 = Iq × 0.51 Nm/A, 토크 0일 때 전류는 항상 정확히 0.0 A). 원래 판단을 철회했고, 어느 쪽이 맞는지는 아직 판정하지 못했습니다.
+        </div>
         <ul class="tags"><li>STM32 HAL</li><li>DMA</li><li>CAN</li><li>C</li><li>Raspberry Pi 5</li><li>UDP/TCP</li><li>FastAPI</li></ul>
-        <div class="p-links"><a href="https://github.com/tkddn647-ship-it/afa2026">코드 보기</a><a href="https://github.com/tkddn647-ship-it/afa-telemetry-sql">이 데이터의 SQL 분석</a></div>
+        <div class="p-links"><a href="https://github.com/tkddn647-ship-it/afa2026">코드 보기</a><a href="https://github.com/tkddn647-ship-it/afa2026/tree/main/analysis">사후 검증 문서</a><a href="https://github.com/tkddn647-ship-it/afa-telemetry-sql">이 데이터의 SQL 분석</a></div>
       </div>
     </div>
   </article>
